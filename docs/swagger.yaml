@@ -1,0 +1,578 @@
+definitions:
+  helper.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+  models.CommentReqs:
+    properties:
+      message:
+        type: string
+    type: object
+  models.PhotoReqs:
+    properties:
+      caption:
+        type: string
+      comments:
+        items:
+          type: string
+        type: array
+      photo_url:
+        type: string
+      title:
+        type: string
+    type: object
+  models.SocialMediaReqs:
+    properties:
+      name_sosmed:
+        type: string
+      social_media_url:
+        type: string
+    type: object
+  models.UserLogin:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  models.UserRegister:
+    properties:
+      age:
+        type: integer
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact:
+    email: afan.syarifudin10@gmail.com
+    name: Nur Afan Syarifudin
+  description: A My-Gram RESTFull API using Gin + GORM with JWT Auth
+  license:
+    name: MIT License
+  title: MyGram RESTFull-API
+  version: "1.0"
+paths:
+  /comments:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Comment
+      parameters:
+      - description: Id of the comment
+        in: path
+        name: ID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Delete Comment
+      tags:
+      - Comments
+    get:
+      consumes:
+      - application/json
+      description: GetAll Comment
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: GetAll Comment
+      tags:
+      - Comments
+    post:
+      consumes:
+      - application/json
+      description: Create Comment
+      parameters:
+      - description: Create new comment
+        in: body
+        name: photo
+        required: true
+        schema:
+          $ref: '#/definitions/models.CommentReqs'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Create Comment
+      tags:
+      - Comments
+  /comments/{commentId}:
+    get:
+      consumes:
+      - application/json
+      description: GetByID Comment
+      parameters:
+      - description: Id of the comment
+        in: path
+        name: ID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: GetByID Comment
+      tags:
+      - Comments
+    put:
+      consumes:
+      - application/json
+      description: Update Comment
+      parameters:
+      - description: Update comment
+        in: body
+        name: photo
+        required: true
+        schema:
+          $ref: '#/definitions/models.CommentReqs'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Update Comment
+      tags:
+      - Comments
+  /photos:
+    get:
+      consumes:
+      - application/json
+      description: GetAll Photo
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: GetAll Photo
+      tags:
+      - Photos
+    post:
+      consumes:
+      - application/json
+      description: Create Photo
+      parameters:
+      - description: Create new photo
+        in: body
+        name: photo
+        required: true
+        schema:
+          $ref: '#/definitions/models.PhotoReqs'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Create Photo
+      tags:
+      - Photos
+  /photos/{photoId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Photo
+      parameters:
+      - description: ID of the photo
+        in: path
+        name: ID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Delete Photo
+      tags:
+      - Photos
+    get:
+      consumes:
+      - application/json
+      description: GetByID Photo
+      parameters:
+      - description: ID of the photo
+        in: path
+        name: ID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: GetByID Photo
+      tags:
+      - Photos
+    put:
+      consumes:
+      - application/json
+      description: Update Photo
+      parameters:
+      - description: ID of the photo
+        in: path
+        name: ID
+        required: true
+        type: integer
+      - description: Create new photo
+        in: body
+        name: photo
+        required: true
+        schema:
+          $ref: '#/definitions/models.PhotoReqs'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Update Photo
+      tags:
+      - Photos
+  /socialmedias:
+    get:
+      consumes:
+      - application/json
+      description: GetAll Social Media
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: GetAll Social Media
+      tags:
+      - Social Media
+    post:
+      consumes:
+      - application/json
+      description: Create Social Media
+      parameters:
+      - description: Create new social media
+        in: body
+        name: photo
+        required: true
+        schema:
+          $ref: '#/definitions/models.SocialMediaReqs'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Create Social Media
+      tags:
+      - Social Media
+    put:
+      consumes:
+      - application/json
+      description: Update Social Media
+      parameters:
+      - description: Create new social media
+        in: body
+        name: photo
+        required: true
+        schema:
+          $ref: '#/definitions/models.SocialMediaReqs'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Update Social Media
+      tags:
+      - Social Media
+  /socialmedias/{mediaId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Social Media
+      parameters:
+      - description: Id of the social media
+        in: path
+        name: Id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: Delete Social Media
+      tags:
+      - Social Media
+    get:
+      consumes:
+      - application/json
+      description: GetByID Social Media
+      parameters:
+      - description: Id of the social media
+        in: path
+        name: Id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - Bearer: []
+      summary: GetByID Social Media
+      tags:
+      - Social Media
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: Login User
+      parameters:
+      - description: Login User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserLogin'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Login User
+      tags:
+      - Users
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: Register User
+      parameters:
+      - description: Register New User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserRegister'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/helper.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.Response'
+      summary: Register User
+      tags:
+      - Users
+securityDefinitions:
+  Bearer:
+    description: Description for what is this security definition being used
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
