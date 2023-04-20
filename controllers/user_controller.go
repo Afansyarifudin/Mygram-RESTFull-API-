@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"mygram/config"
 	"mygram/helper"
 	"mygram/models"
@@ -83,7 +82,7 @@ func (h HttpServer) LoginUser(c *gin.Context) {
 		})
 		return
 	}
-	fmt.Println((User.Password), (password))
+	// fmt.Println((User.Password), (password))
 	if comparePass := helper.ComparePassword([]byte(User.Password), []byte(password)); !comparePass {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"error":   "unauthorized",
